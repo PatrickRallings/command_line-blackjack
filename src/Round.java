@@ -6,18 +6,21 @@ public class Round {
     private Deck deck;
     private ArrayList<String> dealerHand;
     public ArrayList<String[]> dealerHandArray;
+    public ArrayList<String[]> playerHandArray;
     private ArrayList<String> playerHand;
     private int dealerHandValue = 0;
     private int playerHandValue = 0;
     private int dealerAceCount = 0;
     private int playerAceCount = 0;
     public String roundStatus;
+    public HandVisual hv;
 
     public Round(Player currentPlayer,int bet, Deck deck) {
         this.currentPlayer = currentPlayer;
         this.dealerHand = new ArrayList<>();
         this.playerHand = new ArrayList<>();
         this.dealerHandArray = new ArrayList<>();
+        this.playerHandArray = new ArrayList<>();
         this.deck = deck;
         this.bet = bet;
         dealPlayerCard();
@@ -29,6 +32,9 @@ public class Round {
     public ArrayList<String[]> getDealerHandArray() {
         return dealerHandArray;
     }
+    public ArrayList<String[]> getPlayerHandArray() {
+        return playerHandArray;
+    }
 
     private void dealDealerCard() {
         dealerHand.add(deck.getCurrentCard());
@@ -39,11 +45,13 @@ public class Round {
 
     public void dealPlayerCard() {
         playerHand.add(deck.getCurrentCard());
+        playerHandArray.add(deck.getCurrentCardArray());
         updatePlayerHandValue();
         deck.nextCardArray();
     }
 
     public String showCards() {
+        hv = new HandVisual(getPlayerHandArray());
         String hand = "The dealer's face-up card is: " + dealerHand.get(1) + "\nYour cards: | ";
         for (int i = 0; i < this.playerHand.size(); i++) {
             hand += (playerHand.get(i)) + " | ";
@@ -54,7 +62,7 @@ public class Round {
         } else {
             hand += "\nPlease enter either hit or stay:";
         }
-        return hand.toString();
+        return hand.toString()+"\n\n"+hv.getOutput();
     }
 
     public String getDealerHand() {
@@ -118,9 +126,14 @@ public class Round {
         } else {
             while (true) {
                 System.out.println(showCards());
-                System.out.println("Hit | Stay | Double Down");
+                if (dealCount == 0){
+                    System.out.println("Hit | Stay | Double Down");
+                } else {
+                    System.out.println("Hit | Stay");
+                }
+
                 String s = Main.scanner.nextLine();
-                if (s.equalsIgnoreCase("double down")){
+                if (s.equalsIgnoreCase("double down") && dealCount == 0){
                     dealPlayerCard();
                     if (playerHandValue > 21){
                         System.out.println(showCards());
