@@ -7,6 +7,9 @@ public class HandVisual {
     String middle;
     String bottom;
     String output;
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
+    public static final String ANSI_RESET = "\u001B[0m";
 
     public HandVisual(ArrayList<String[]> hand){
         this.hand = hand;
@@ -17,32 +20,32 @@ public class HandVisual {
         setOutput();
     }
     public void setTop(){
-        top = "";
+        top = ANSI_GREEN_BACKGROUND+"        D E A L E R' S  H A N D      "+ANSI_RESET+"\n"+ANSI_GREEN_BACKGROUND+"       ";
         for (int i = 0; i < hand.size(); i++) {
-            top += CardVisual.getFlippedTop(hand.get(i)[3])+"     ";
+            top += CardVisual.getFlippedTop(hand.get(i)[3], hand.get(i)[1])+ANSI_GREEN_BACKGROUND+"     "+ANSI_RESET;
         }
         top += "\n";
     }
     public void setBlank(){
-        blank = "";
+        blank = ANSI_GREEN_BACKGROUND+"       "+ANSI_RESET;
         for (int i = 0; i < hand.size(); i++) {
-            blank += CardVisual.getFlippedBlank()+"     ";
+            blank += CardVisual.getFlippedBlank(hand.get(i)[1])+ANSI_GREEN_BACKGROUND+"     "+ANSI_RESET;
         }
         blank += "\n";
     }
     public void setMiddle(){
-        middle = "";
+        middle = ANSI_GREEN_BACKGROUND+"       "+ANSI_RESET;
         for (int i = 0; i < hand.size(); i++) {
-            middle += CardVisual.getFlippedMiddle(hand.get(i)[1])+"     ";
+            middle += CardVisual.getFlippedMiddle(hand.get(i)[1])+ANSI_GREEN_BACKGROUND+"     "+ANSI_RESET;
         }
         middle += "\n";
     }
     public void setBottom(){
-        bottom = "";
+        bottom = ANSI_GREEN_BACKGROUND+"       "+ANSI_RESET;
         for (int i = 0; i < hand.size(); i++) {
-            bottom += CardVisual.getFlippedBottom(hand.get(i)[3])+"     ";
+            bottom += CardVisual.getFlippedBottom(hand.get(i)[3], hand.get(i)[1])+ANSI_GREEN_BACKGROUND+"     "+ANSI_RESET;
         }
-        bottom += "\n";
+        bottom += "\n"+ANSI_GREEN_BACKGROUND+"                                     "+ANSI_RESET;
     }
     public void setOutput(){
         output = top+blank+middle+blank+bottom;
