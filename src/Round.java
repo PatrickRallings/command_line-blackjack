@@ -103,6 +103,7 @@ public class Round {
     }
 
     public String ongoingRound(){
+        int dealCount = 0;
         if (dealerHandValue == 21) {
             System.out.println(showCards());
             System.out.println(getDealerHand());
@@ -111,8 +112,40 @@ public class Round {
         } else {
             while (true) {
                 System.out.println(showCards());
-                System.out.println("Hit | Stay:");
-                if (Main.scanner.nextLine().equalsIgnoreCase("hit")) {
+                System.out.println("Hit | Stay | Double Down");
+                String s = Main.scanner.nextLine();
+                if (s.equalsIgnoreCase("double down")){
+                    dealPlayerCard();
+                    if (playerHandValue > 21){
+                        System.out.println(showCards());
+                        System.out.println("Sorry, you busted.");
+                        roundStatus = "lostdouble";
+                        break;
+                    } else {
+                        dealerPlayOut();
+                        System.out.println(showCards());
+                        System.out.println(getDealerHand());
+                        if ((playerHandValue == 21) && dealerHandValue != 21) {
+                            System.out.println("You won with 21 on a double down!");
+                            roundStatus = "won21double";
+                            break;
+                        } else if ((dealerHandValue > 21) || (dealerHandValue < playerHandValue && playerHandValue <= 21)) {
+                            System.out.println("You won with a double down!");
+                            roundStatus = "wondouble";
+                            break;
+                        } else if ((dealerHandValue == 21 && playerHandValue == 21)) {
+                            System.out.println("Push.");
+                            roundStatus = "push";
+                            break;
+                        }  else {
+                            System.out.println("Sorry, you lost on a double down.");
+                            roundStatus = "lostdouble";
+                            break;
+                        }
+                    }
+                }
+                if (s.equalsIgnoreCase("hit")) {
+                    dealCount++;
                     dealPlayerCard();
                     if (playerHandValue > 21){
                         System.out.println(showCards());
