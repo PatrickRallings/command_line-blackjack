@@ -41,6 +41,8 @@ public class Game {
             currentPlayer.lostChips(currentRound.getBet());
         } else if (currentRound.roundStatus.equalsIgnoreCase("won")){
             currentPlayer.wonChips(currentRound.getBet());
+        } else if (currentRound.roundStatus.equalsIgnoreCase("won21")){
+            currentPlayer.wonChips((int) ((currentRound.getBet())*1.5));
         }
     }
 

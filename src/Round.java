@@ -124,11 +124,19 @@ public class Round {
                     dealerPlayOut();
                     System.out.println(showCards());
                     System.out.println(getDealerHand());
-                    if ((dealerHandValue > 21) || (dealerHandValue < playerHandValue && playerHandValue <= 21)) {
+                    if ((playerHandValue == 21) && dealerHandValue != 21) {
+                        System.out.println("You won with 21!");
+                        roundStatus = "won21";
+                        break;
+                    } else if ((dealerHandValue > 21) || (dealerHandValue < playerHandValue && playerHandValue <= 21)) {
                         System.out.println("You won!");
                         roundStatus = "won";
                         break;
-                    } else {
+                    } else if ((dealerHandValue == 21 && playerHandValue == 21)) {
+                        System.out.println("Push.");
+                        roundStatus = "push";
+                        break;
+                    }  else {
                         System.out.println("Sorry, you lost.");
                         roundStatus = "lost";
                         break;
@@ -139,9 +147,6 @@ public class Round {
         }
         return roundStatus;
     }
-
-
-
     public int getBet() {
         return bet;
     }
