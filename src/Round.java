@@ -5,6 +5,7 @@ public class Round {
     public int bet;
     private Deck deck;
     private ArrayList<String> dealerHand;
+    public ArrayList<String[]> dealerHandArray;
     private ArrayList<String> playerHand;
     private int dealerHandValue = 0;
     private int playerHandValue = 0;
@@ -16,6 +17,7 @@ public class Round {
         this.currentPlayer = currentPlayer;
         this.dealerHand = new ArrayList<>();
         this.playerHand = new ArrayList<>();
+        this.dealerHandArray = new ArrayList<>();
         this.deck = deck;
         this.bet = bet;
         dealPlayerCard();
@@ -24,9 +26,13 @@ public class Round {
         dealDealerCard();
     }
 
+    public ArrayList<String[]> getDealerHandArray() {
+        return dealerHandArray;
+    }
 
     private void dealDealerCard() {
         dealerHand.add(deck.getCurrentCard());
+        dealerHandArray.add(deck.getCurrentCardArray());
         updateDealerHandValue();
         deck.nextCardArray();
     }
