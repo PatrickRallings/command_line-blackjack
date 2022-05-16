@@ -78,11 +78,10 @@ public class Round {
         if (deck.getCurrentCardValue().equalsIgnoreCase("")) {
             dealerAceCount++;
             dealerHandValue += 11;
-            int tempNum = 0;
-            while (dealerHandValue > 21) {
-                tempNum++;
+            while (dealerHandValue > 21 && dealerAceCount > 0) {
+                dealerAceCount--;
                 dealerHandValue -= 10;
-                if (dealerHandValue <= 21 || tempNum == dealerAceCount) {
+                if (dealerHandValue <= 21) {
                     break;
                 }
             }
@@ -95,11 +94,10 @@ public class Round {
         if (deck.getCurrentCardValue().equalsIgnoreCase("")) {
             playerAceCount++;
             playerHandValue += 11;
-            int tempNum = 0;
-            while (playerHandValue > 21) {
-                tempNum++;
+            while (playerHandValue > 21 && playerAceCount > 0) {
+                playerAceCount--;
                 playerHandValue -= 10;
-                if (playerHandValue <= 21 || tempNum == playerAceCount) {
+                if (playerHandValue <= 21) {
                     break;
                 }
             }
@@ -184,7 +182,7 @@ public class Round {
                         System.out.println("You won!");
                         roundStatus = "won";
                         break;
-                    } else if ((dealerHandValue == 21 && playerHandValue == 21)) {
+                    } else if ((dealerHandValue == playerHandValue)) {
                         System.out.println("Push.");
                         roundStatus = "push";
                         break;
