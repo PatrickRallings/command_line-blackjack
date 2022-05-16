@@ -14,8 +14,7 @@ public class Menu {
                 "Chip Count: "+game.currentPlayer.getChipCount()+ "\n\n" +
                 "Main Menu (Select an Option)\n" +
                 "1: Add more chips\n" +
-                "2: Play BlackJack\n" +
-                "3: Exit"
+                "2: Play BlackJack\n"
                 );
     }
     public String getPostRoundMenu(){

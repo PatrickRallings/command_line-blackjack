@@ -29,7 +29,7 @@ public class CardVisual {
             }
         }
         else {
-            return ANSI_WHITE_BACKGROUND + RED_BOLD_BRIGHT + " " + val + "        " + ANSI_RESET;
+            return ANSI_WHITE_BACKGROUND + BLACK_BOLD_BRIGHT + " " + val + "        " + ANSI_RESET;
         }
     }
     public static String getFlippedBottom(String val, String symbol){
@@ -40,7 +40,7 @@ public class CardVisual {
                 return ANSI_WHITE_BACKGROUND + BLACK_BOLD_BRIGHT + "        " + val + " " + ANSI_RESET;
             }
         } else {
-            return ANSI_WHITE_BACKGROUND + RED_BOLD_BRIGHT + "        " + val + " " + ANSI_RESET;
+            return ANSI_WHITE_BACKGROUND + BLACK_BOLD_BRIGHT + "        " + val + " " + ANSI_RESET;
         }
     }
 
