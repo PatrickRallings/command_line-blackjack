@@ -13,7 +13,9 @@ public class Round {
     private int dealerAceCount = 0;
     private int playerAceCount = 0;
     public String roundStatus;
-    public HandVisual hv;
+    public HandVisual playerHandVisual;
+    public HandVisual dealerHandVisual;
+    Visuals v;
 
     public Round(Player currentPlayer,int bet, Deck deck) {
         this.currentPlayer = currentPlayer;
@@ -21,6 +23,7 @@ public class Round {
         this.playerHand = new ArrayList<>();
         this.dealerHandArray = new ArrayList<>();
         this.playerHandArray = new ArrayList<>();
+        v = new Visuals();
         this.deck = deck;
         this.bet = bet;
         dealPlayerCard();
@@ -51,7 +54,8 @@ public class Round {
     }
 
     public String showCards() {
-        hv = new HandVisual(getPlayerHandArray());
+        playerHandVisual = new HandVisual(getPlayerHandArray());
+        dealerHandVisual = new HandVisual(getDealerHandArray());
         String hand = "The dealer's face-up card is: " + dealerHand.get(1) + "\nYour cards: | ";
         for (int i = 0; i < this.playerHand.size(); i++) {
             hand += (playerHand.get(i)) + " | ";
@@ -62,17 +66,18 @@ public class Round {
         } else {
             hand += "\nPlease enter either hit or stay:";
         }
-        return hand.toString()+"\n\n"+hv.getOutput();
+//        +hand.toString()+"\n"
+        return v.dealer()+"\n"+dealerHandVisual.getOutput()+"\n"+v.you()+"\n"+playerHandVisual.getOutput();
     }
 
-    public String getDealerHand() {
-        String hand = "The dealer cards: | ";
-        for (int i = 0; i < this.dealerHand.size(); i++) {
-            hand += (dealerHand.get(i)) + " | ";
-        }
-        hand += "Their hand's final value is: " + String.valueOf(this.dealerHandValue);
-        return hand.toString();
-    }
+//    public String getDealerHand() {
+//        String hand = "The dealer cards: | ";
+//        for (int i = 0; i < this.dealerHand.size(); i++) {
+//            hand += (dealerHand.get(i)) + " | ";
+//        }
+//        hand += "Their hand's final value is: " + String.valueOf(this.dealerHandValue);
+//        return hand.toString();
+//    }
 
     public void updateDealerHandValue() {
         if (deck.getCurrentCardValue().equalsIgnoreCase("")) {
@@ -118,16 +123,16 @@ public class Round {
         int dealCount = 0;
         if (dealerHandValue == 21) {
             System.out.println(showCards());
-            System.out.println(getDealerHand());
-            System.out.println("Dealer wins with 21");
+//            System.out.println(getDealerHand());
+//            System.out.println("Dealer wins with 21");
             roundStatus = "lost";
         } else {
             while (true) {
                 System.out.println(showCards());
                 if (dealCount == 0){
-                    System.out.println("Hit | Stay | Double Down");
+                    System.out.println(v.hit_stay_doubleDown());
                 } else {
-                    System.out.println("Hit | Stay");
+                    System.out.println(v.hit_stay());
                 }
 
                 String s = Main.scanner.nextLine();
@@ -135,19 +140,19 @@ public class Round {
                     dealPlayerCard();
                     if (playerHandValue > 21){
                         System.out.println(showCards());
-                        System.out.println("Sorry, you busted.");
+//                        System.out.println("Sorry, you busted.");
                         roundStatus = "lostdouble";
                         break;
                     } else {
                         dealerPlayOut();
                         System.out.println(showCards());
-                        System.out.println(getDealerHand());
+//                        System.out.println(getDealerHand());
                         if ((playerHandValue == 21) && dealerHandValue != 21) {
-                            System.out.println("You won with 21 on a double down!");
+//                            System.out.println("You won with 21 on a double down!");
                             roundStatus = "won21double";
                             break;
                         } else if ((dealerHandValue > 21) || (dealerHandValue < playerHandValue && playerHandValue <= 21)) {
-                            System.out.println("You won with a double down!");
+//                            System.out.println("You won with a double down!");
                             roundStatus = "wondouble";
                             break;
                         } else if ((dealerHandValue == 21 && playerHandValue == 21)) {
@@ -155,7 +160,7 @@ public class Round {
                             roundStatus = "push";
                             break;
                         }  else {
-                            System.out.println("Sorry, you lost on a double down.");
+//                            System.out.println("Sorry, you lost on a double down.");
                             roundStatus = "lostdouble";
                             break;
                         }
@@ -173,21 +178,21 @@ public class Round {
                 } else {
                     dealerPlayOut();
                     System.out.println(showCards());
-                    System.out.println(getDealerHand());
+//                    System.out.println(getDealerHand());
                     if ((playerHandValue == 21) && dealerHandValue != 21) {
-                        System.out.println("You won with 21!");
+//                        System.out.println("You won with 21!");
                         roundStatus = "won21";
                         break;
                     } else if ((dealerHandValue > 21) || (dealerHandValue < playerHandValue && playerHandValue <= 21)) {
-                        System.out.println("You won!");
+//                        System.out.println("You won!");
                         roundStatus = "won";
                         break;
                     } else if ((dealerHandValue == playerHandValue)) {
-                        System.out.println("Push.");
+//                        System.out.println("Push.");
                         roundStatus = "push";
                         break;
                     }  else {
-                        System.out.println("Sorry, you lost.");
+//                        System.out.println("Sorry, you lost.");
                         roundStatus = "lost";
                         break;
                     }

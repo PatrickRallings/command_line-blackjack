@@ -58,7 +58,7 @@ public class HandVisual {
         for (int i = 0; i < hand.size(); i++) {
             middle += CardVisual.getFlippedMiddle(hand.get(i)[1])+ANSI_GREEN_BACKGROUND+"     "+ANSI_RESET;
         }
-        middle += ANSI_BLACK_BACKGROUND+ANSI_GREEN+"$"+ANSI_RESET+" <- Y O U R  H A N D"+"\n";
+        middle += ANSI_BLACK_BACKGROUND+ANSI_GREEN+"$"+ANSI_RESET+"\n";
     }
     public void setBottom(){
         bottom = ANSI_BLACK_BACKGROUND+ANSI_GREEN+"$"+ANSI_GREEN_BACKGROUND+"     "+ANSI_RESET;
