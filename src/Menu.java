@@ -21,7 +21,7 @@ public class Menu {
         return (
                 game.currentPlayer.getName() + ", you now have "+game.currentPlayer.getChipCount()+ " chips.\n" +
                 "Would you like to: (Select an Option)\n" +
-                "1: Return to Main Menu\n" +
+                "1: Exit\n" +
                 "2: Play another round\n"
         );
     }
