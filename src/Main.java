@@ -16,7 +16,9 @@ public class Main {
         mainMenu();
     }
     public static void mainMenu(){
+        breakLabel:
         while (true) {
+
             System.out.println(menu.getMainMenu());
             switch (scanner.nextLine().toLowerCase()) {
                 case "1":
@@ -30,7 +32,7 @@ public class Main {
                         System.out.println("Error: Please enter your response again.");
                         break;
                     }
-                    break;
+                    break breakLabel;
                 case "3":
                     break;
                 default:
