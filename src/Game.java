@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Game {
     private ArrayList<Player> playerProfiles = new ArrayList<>();
@@ -7,8 +6,6 @@ public class Game {
     private final Deck deck;
     public Round currentRound;
     public Player currentPlayer;
-    public Scanner scan = new Scanner(System.in);
-    public Menu menu;
 
     public Game (){
         deck = new Deck();
