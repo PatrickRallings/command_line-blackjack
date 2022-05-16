@@ -15,33 +15,32 @@ public class HandVisual {
         setMiddle();
         setBottom();
         setOutput();
-        System.out.println(hand.size());
     }
     public void setTop(){
         top = "";
-        for (int i = 0; i < hand.size()-1; i++) {
-            top += CardVisual.getFlippedTop(hand.get(i)[3]);
+        for (int i = 0; i < hand.size(); i++) {
+            top += CardVisual.getFlippedTop(hand.get(i)[3])+"     ";
         }
         top += "\n";
     }
     public void setBlank(){
         blank = "";
-        for (int i = 0; i < hand.size()-1; i++) {
-            blank += CardVisual.getFlippedBlank();
+        for (int i = 0; i < hand.size(); i++) {
+            blank += CardVisual.getFlippedBlank()+"     ";
         }
         blank += "\n";
     }
     public void setMiddle(){
         middle = "";
-        for (int i = 0; i < hand.size()-1; i++) {
-            middle += CardVisual.getFlippedMiddle(hand.get(i)[1]);
+        for (int i = 0; i < hand.size(); i++) {
+            middle += CardVisual.getFlippedMiddle(hand.get(i)[1])+"     ";
         }
         middle += "\n";
     }
     public void setBottom(){
         bottom = "";
-        for (int i = 0; i < hand.size()-1; i++) {
-            bottom += CardVisual.getFlippedBottom(hand.get(i)[3]);
+        for (int i = 0; i < hand.size(); i++) {
+            bottom += CardVisual.getFlippedBottom(hand.get(i)[3])+"     ";
         }
         bottom += "\n";
     }
@@ -51,12 +50,4 @@ public class HandVisual {
     public String getOutput(){
         return output;
     }
-
-//    public void createRow(){
-//        CardVisual.getFlippedTop()+"\n" +
-//                CardVisual.getFlippedBlank()+"\n" +
-//                CardVisual.getFlippedMiddle()+"\n" +
-//                CardVisual.getFlippedBlank()+"\n" +
-//                CardVisual.getFlippedBottom()+"\n";
-//    }
 }
