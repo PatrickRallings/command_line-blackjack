@@ -55,7 +55,7 @@ public class Round {
         deck.nextCardArray();
     }
 
-    public String showCards() {
+    public String showCards(String overload) {
         playerHandVisual = new HandVisual(getPlayerHandArray());
         dealerHandVisual = new HandVisual(getDealerHandArray());
         hiddenDealerVisual = new HiddenHandVisual(getDealerHandArray());
@@ -70,6 +70,22 @@ public class Round {
             hand += "\nPlease enter either hit or stay:";
         }
 //        +hand.toString()+"\n"
+        return v.dealer()+"\n"+dealerHandVisual.getOutput()+"\n"+v.you()+"\n"+playerHandVisual.getOutput();
+    }
+    public String showCards() {
+        playerHandVisual = new HandVisual(getPlayerHandArray());
+        dealerHandVisual = new HandVisual(getDealerHandArray());
+        hiddenDealerVisual = new HiddenHandVisual(getDealerHandArray());
+        String hand = "The dealer's face-up card is: " + dealerHand.get(1) + "\nYour cards: | ";
+        for (int i = 0; i < this.playerHand.size(); i++) {
+            hand += (playerHand.get(i)) + " | ";
+        }
+        hand += "You hand's value is currently: " + String.valueOf(this.playerHandValue);
+        if (this.playerHandValue > 21){
+            hand += "\nYOU LOST THE ROUND.";
+        } else {
+            hand += "\nPlease enter either hit or stay:";
+        }
         return v.dealer()+"\n"+hiddenDealerVisual.getOutput()+"\n"+v.you()+"\n"+playerHandVisual.getOutput();
     }
 
@@ -171,7 +187,7 @@ public class Round {
                     }
                 } else {
                     dealerPlayOut();
-                    System.out.println(showCards());
+                    System.out.println(showCards("overload"));
 //                    System.out.println(getDealerHand());
                     if ((playerHandValue == 21) && dealerHandValue != 21) {
                         System.out.println("You won with 21!");
