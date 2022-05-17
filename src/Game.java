@@ -6,7 +6,7 @@ public class Game {
     private final Deck deck;
     public Round currentRound;
     public Player currentPlayer;
-    Visuals v = new Visuals();
+    TextVisual v = new TextVisual();
 
     public Game (){
         deck = new Deck();

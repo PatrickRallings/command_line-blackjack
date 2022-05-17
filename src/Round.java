@@ -14,8 +14,10 @@ public class Round {
     private int playerAceCount = 0;
     public String roundStatus;
     public HandVisual playerHandVisual;
+    public HiddenHandVisual hiddenDealerVisual;
     public HandVisual dealerHandVisual;
-    Visuals v;
+
+    TextVisual v;
 
     public Round(Player currentPlayer,int bet, Deck deck) {
         this.currentPlayer = currentPlayer;
@@ -23,7 +25,7 @@ public class Round {
         this.playerHand = new ArrayList<>();
         this.dealerHandArray = new ArrayList<>();
         this.playerHandArray = new ArrayList<>();
-        v = new Visuals();
+        v = new TextVisual();
         this.deck = deck;
         this.bet = bet;
         dealPlayerCard();
@@ -56,6 +58,7 @@ public class Round {
     public String showCards() {
         playerHandVisual = new HandVisual(getPlayerHandArray());
         dealerHandVisual = new HandVisual(getDealerHandArray());
+        hiddenDealerVisual = new HiddenHandVisual(getDealerHandArray());
         String hand = "The dealer's face-up card is: " + dealerHand.get(1) + "\nYour cards: | ";
         for (int i = 0; i < this.playerHand.size(); i++) {
             hand += (playerHand.get(i)) + " | ";
@@ -67,17 +70,8 @@ public class Round {
             hand += "\nPlease enter either hit or stay:";
         }
 //        +hand.toString()+"\n"
-        return v.dealer()+"\n"+dealerHandVisual.getOutput()+"\n"+v.you()+"\n"+playerHandVisual.getOutput();
+        return v.dealer()+"\n"+hiddenDealerVisual.getOutput()+"\n"+v.you()+"\n"+playerHandVisual.getOutput();
     }
-
-//    public String getDealerHand() {
-//        String hand = "The dealer cards: | ";
-//        for (int i = 0; i < this.dealerHand.size(); i++) {
-//            hand += (dealerHand.get(i)) + " | ";
-//        }
-//        hand += "Their hand's final value is: " + String.valueOf(this.dealerHandValue);
-//        return hand.toString();
-//    }
 
     public void updateDealerHandValue() {
         if (deck.getCurrentCardValue().equalsIgnoreCase("")) {
@@ -180,7 +174,7 @@ public class Round {
                     System.out.println(showCards());
 //                    System.out.println(getDealerHand());
                     if ((playerHandValue == 21) && dealerHandValue != 21) {
-//                        System.out.println("You won with 21!");
+                        System.out.println("You won with 21!");
                         roundStatus = "won21";
                         break;
                     } else if ((dealerHandValue > 21) || (dealerHandValue < playerHandValue && playerHandValue <= 21)) {

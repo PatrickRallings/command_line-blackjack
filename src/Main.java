@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main {
 
     public static Game game;
-    public static Visuals v = new Visuals();
+    public static TextVisual v = new TextVisual();
     public static Menu menu;
     static Scanner scanner = new Scanner(System.in);
 

@@ -1,7 +1,9 @@
 public class Test {
     public static void main(String[] args) {
-        Visuals v = new Visuals();
-        System.out.println(v.you());
+        Deck d = new Deck();
+        Player p = new Player("p");
+        Round r = new Round(p, 500, d);
+        System.out.println(r.hiddenDealerVisual);
 
     }
 }
